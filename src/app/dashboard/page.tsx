@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Check, DollarSign, ShoppingCart, ArrowUp, Package, Inbox } from "lucide-react"
+import { Check, DollarSign, ArrowUp, Package, Inbox } from "lucide-react"
 import { SalesChart } from "@/components/dashboard/sales-chart"
 import { OrderChart } from "@/components/dashboard/order-chart"
 import Link from "next/link"
@@ -29,8 +29,8 @@ const lowQuantityStock = [
 
 export default function DashboardPage() {
   return (
-    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-      <Card className="w-full mb-4">
+    <div className="flex flex-col gap-4">
+      <Card className="w-full">
           <CardHeader>
               <div className="flex items-center justify-between">
                   <div>
