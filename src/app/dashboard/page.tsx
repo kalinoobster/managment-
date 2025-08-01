@@ -38,7 +38,7 @@ export default function DashboardPage() {
                       <CardDescription>It's good to see you again.</CardDescription>
                   </div>
                   <div className="relative h-24 w-24">
-                      <Image src="https://placehold.co/100x100.png" alt="Waving character" layout="fill" objectFit="contain" data-ai-hint="waving person illustration"/>
+                      <Image src="https://placehold.co/100x100.png" alt="Waving character" fill className="object-contain" data-ai-hint="waving person illustration"/>
                   </div>
               </div>
           </CardHeader>
