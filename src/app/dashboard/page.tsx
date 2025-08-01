@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Check, DollarSign, ArrowUp, Package, Inbox, ArrowDown } from "lucide-react"
+import { DollarSign, ArrowUp, Package, Inbox, ArrowDown, Warehouse } from "lucide-react"
 import Link from "next/link"
 import { mockOrders, mockProducts } from "@/lib/mock-data"
 
@@ -49,8 +49,9 @@ export default function DashboardPage() {
         hint: product.category.toLowerCase()
     }));
 
-    const numberOfCategories = new Set(mockProducts.map(p => p.category)).size;
+    const mostInStockProduct = mockProducts.reduce((max, p) => p.stock > max.stock ? p : max, mockProducts[0]);
     const quantityInHand = mockProducts.reduce((total, p) => total + p.stock, 0);
+    const ordersToBeReceived = mockOrders.filter(o => o.status === 'Processing').reduce((sum, o) => sum + o.quantity, 0);
     
     const today = new Date().toISOString().split('T')[0];
     const todaysTotalOrders = mockOrders.filter(o => o.date.startsWith(today)).length;
@@ -83,11 +84,12 @@ export default function DashboardPage() {
        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Number of Categories</CardTitle>
-            <Check className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Most Product In Stock</CardTitle>
+            <Warehouse className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{numberOfCategories}</div>
+            <div className="text-2xl font-bold">{mostInStockProduct.name}</div>
+            <p className="text-xs text-muted-foreground">{mostInStockProduct.stock} units available</p>
           </CardContent>
         </Card>
         <Card>
@@ -122,7 +124,8 @@ export default function DashboardPage() {
             <Inbox className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">100</div>
+            <div className="text-2xl font-bold">{ordersToBeReceived}</div>
+            <p className="text-xs text-muted-foreground">Items in processing orders</p>
           </CardContent>
         </Card>
       </div>
