@@ -35,20 +35,32 @@ export default function DashboardPage() {
       return {
         name: productName,
         sold: sold,
-        remaining: product ? product.stock : 0, // Remaining stock should be from product data
+        remaining: product ? product.stock : 0,
         price: product ? product.price : 0
       };
     });
 
   const lowQuantityStock = mockProducts
     .filter(p => p.stock < p.reorderThreshold)
-    .slice(0, 3) // Show top 3 for the dashboard
+    .slice(0, 3)
     .map(product => ({
         name: product.name,
         remaining: product.stock,
         image: `https://placehold.co/40x40.png`,
         hint: product.category.toLowerCase()
     }));
+
+    const numberOfCategories = new Set(mockProducts.map(p => p.category)).size;
+    const quantityInHand = mockProducts.reduce((total, p) => total + p.stock, 0);
+    
+    const today = new Date().toISOString().split('T')[0];
+    const todaysTotalOrders = mockOrders.filter(o => o.date.startsWith(today)).length;
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdaysDate = yesterday.toISOString().split('T')[0];
+    const yesterdaysTotalOrders = mockOrders.filter(o => o.date.startsWith(yesterdaysDate)).length;
+
+    const percentageIncrease = yesterdaysTotalOrders > 0 ? ((todaysTotalOrders - yesterdaysTotalOrders) / yesterdaysTotalOrders) * 100 : todaysTotalOrders > 0 ? 100 : 0;
 
 
   return (
@@ -74,7 +86,7 @@ export default function DashboardPage() {
             <Check className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">12</div>
+            <div className="text-2xl font-bold">{numberOfCategories}</div>
           </CardContent>
         </Card>
         <Card>
@@ -83,10 +95,10 @@ export default function DashboardPage() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">270</div>
+            <div className="text-2xl font-bold">{todaysTotalOrders}</div>
             <p className="text-xs text-muted-foreground flex items-center">
               <ArrowUp className="h-4 w-4 text-green-500" />
-              12%
+              {percentageIncrease.toFixed(1)}%
             </p>
           </CardContent>
         </Card>
@@ -96,7 +108,7 @@ export default function DashboardPage() {
             <Package className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">500</div>
+            <div className="text-2xl font-bold">{quantityInHand}</div>
           </CardContent>
         </Card>
         <Card>
