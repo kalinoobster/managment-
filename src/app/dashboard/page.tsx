@@ -13,12 +13,7 @@ import { Check, DollarSign, ArrowUp, Package, Inbox } from "lucide-react"
 import { SalesChart } from "@/components/dashboard/sales-chart"
 import { OrderChart } from "@/components/dashboard/order-chart"
 import Link from "next/link"
-
-const topSellingStock = [
-  { name: 'Surf Excel', sold: 30, remaining: 12, price: 100 },
-  { name: 'Rin', sold: 21, remaining: 15, price: 207 },
-  { name: 'Parle G', sold: 19, remaining: 17, price: 105 },
-]
+import { mockOrders, mockProducts } from "@/lib/mock-data"
 
 const lowQuantityStock = [
     { name: 'Tata Salt', remaining: '10 Packet', image: 'https://placehold.co/40x40.png', hint: 'salt packet' },
@@ -28,6 +23,29 @@ const lowQuantityStock = [
 
 
 export default function DashboardPage() {
+  const salesByProduct = mockOrders
+    .filter(order => order.status !== 'Cancelled')
+    .reduce((acc, order) => {
+      if (!acc[order.productName]) {
+        acc[order.productName] = 0;
+      }
+      acc[order.productName] += order.quantity;
+      return acc;
+    }, {} as Record<string, number>);
+
+  const topSellingStock = Object.entries(salesByProduct)
+    .sort(([, qtyA], [, qtyB]) => qtyB - qtyA)
+    .slice(0, 3)
+    .map(([productName, sold]) => {
+      const product = mockProducts.find(p => p.name === productName);
+      return {
+        name: productName,
+        sold: sold,
+        remaining: product ? product.stock - sold : 0,
+        price: product ? product.price : 0
+      };
+    });
+
   return (
     <div className="flex flex-col gap-4">
       <Card className="w-full">
@@ -131,7 +149,7 @@ export default function DashboardPage() {
                             <TableCell>{item.name}</TableCell>
                             <TableCell>{item.sold}</TableCell>
                             <TableCell>{item.remaining}</TableCell>
-                            <TableCell>₹ {item.price}</TableCell>
+                            <TableCell>${item.price.toFixed(2)}</TableCell>
                         </TableRow>
                         ))}
                     </TableBody>
