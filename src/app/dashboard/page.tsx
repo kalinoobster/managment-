@@ -68,7 +68,7 @@ export default function DashboardPage() {
               12%
             </p>
           </CardContent>
-        </card>
+        </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Quantity In Hand</CardTitle>
@@ -93,7 +93,9 @@ export default function DashboardPage() {
         <Card className="col-span-4">
           <CardHeader>
             <CardTitle>Sales & Purchase</CardTitle>
-             <Button variant="outline" size="sm" className="ml-auto">Weekly</Button>
+            <CardDescription>
+                <Button variant="outline" size="sm" className="ml-auto">Weekly</Button>
+            </CardDescription>
           </CardHeader>
           <CardContent className="pl-2">
             <SalesChart />
