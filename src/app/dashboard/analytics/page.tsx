@@ -3,13 +3,11 @@
 
 import React, { useState, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { DollarSign, Package, Users, ShoppingCart, TrendingUp, Circle, Truck, CheckCircle, FileText, Star, TrendingDown } from "lucide-react"
+import { DollarSign, Package, Users, ShoppingCart, TrendingUp, Circle, Truck, CheckCircle, FileText, Star, TrendingDown, XCircle } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { mockOrders, mockProducts, mockSales } from '@/lib/mock-data';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
 import { generateReport, GenerateReportOutput } from '@/ai/flows/report-flow';
-import { SalesChart } from "@/components/dashboard/sales-chart"
-import { OrderChart } from "@/components/dashboard/order-chart"
 
 
 type Period = 'monthly' | 'yearly';
@@ -239,7 +237,7 @@ export default function AnalyticsPage() {
                     <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `$${value}`}/>
                     <Tooltip formatter={(value) => `$${(value as number).toFixed(2)}`} />
                     <Legend iconType="circle" />
-                    <Bar dataKey="revenue" fill="#3b82f6" name="Revenue" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="revenue" fill="hsl(var(--primary))" name="Revenue" radius={[4, 4, 0, 0]} />
                 </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -298,33 +296,13 @@ export default function AnalyticsPage() {
              <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Cancelled Orders</CardTitle>
-                    <Circle className="h-4 w-4 text-red-500" />
+                    <XCircle className="h-4 w-4 text-destructive" />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">{orderStatusCounts.Cancelled}</div>
                 </CardContent>
             </Card>
        </div>
-
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
-          <CardHeader>
-            <CardTitle>Sales & Purchase</CardTitle>
-          </CardHeader>
-          <CardContent className="pl-2">
-            <SalesChart />
-          </CardContent>
-        </Card>
-        <Card className="col-span-3">
-          <CardHeader>
-            <CardTitle>Order Summary</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <OrderChart />
-          </CardContent>
-        </Card>
-      </div>
-
     </div>
   );
 }

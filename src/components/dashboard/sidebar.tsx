@@ -19,7 +19,7 @@ export function Sidebar() {
   ]
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col items-center justify-between bg-black py-5 sm:flex rounded-tl-lg rounded-bl-lg">
+    <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col items-center justify-between border-r bg-background py-5 sm:flex">
         <TooltipProvider>
             <nav className="flex flex-col items-center gap-4 px-2 w-full">
                 <Link
@@ -35,8 +35,8 @@ export function Sidebar() {
                             <Link
                             href={item.href}
                             className={cn(
-                                "flex h-12 w-full items-center justify-center rounded-lg text-white/70 transition-colors hover:bg-white/10 hover:text-white",
-                                pathname === item.href && "bg-white/20 text-white border-2 border-white"
+                                "flex h-12 w-full items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground",
+                                pathname === item.href && "bg-muted text-foreground border-2 border-primary"
                             )}
                             >
                             <item.icon className="h-6 w-6" />
@@ -52,8 +52,8 @@ export function Sidebar() {
                     <TooltipTrigger asChild>
                         <Link
                         href="/dashboard/settings"
-                        className={cn("flex h-12 w-full items-center justify-center rounded-lg text-white/70 transition-colors hover:bg-white/10 hover:text-white",
-                           pathname === "/dashboard/settings" && "bg-white/20 text-white"
+                        className={cn("flex h-12 w-full items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground",
+                           pathname === "/dashboard/settings" && "bg-muted text-foreground"
                         )}
                         >
                         <Settings className="h-6 w-6" />
@@ -66,7 +66,7 @@ export function Sidebar() {
                     <TooltipTrigger asChild>
                         <Link
                         href="/login"
-                        className="flex h-12 w-full items-center justify-center rounded-lg text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                        className="flex h-12 w-full items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
                         >
                         <LogOut className="h-6 w-6" />
                         <span className="sr-only">Logout</span>
