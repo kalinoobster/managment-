@@ -1,4 +1,4 @@
-import type { Product, Supplier } from './types';
+import type { Product, Supplier, Sale } from './types';
 
 export const mockProducts: Product[] = [
   { id: 'PROD001', name: 'Organic Apples', category: 'Fruits', stock: 150, reorderThreshold: 50, supplier: 'FreshFarms Inc.', expirationDate: '2024-12-31' },
@@ -18,4 +18,14 @@ export const mockSuppliers: Supplier[] = [
   { id: 'SUP005', name: 'Butcher Bros', contactPerson: 'Tom Hardy', email: 'tom@butcherbros.com', phone: '555-0105', categories: ['Meat'] },
   { id: 'SUP006', name: 'Ocean Fresh', contactPerson: 'Sandy Shore', email: 'sandy@oceanfresh.com', phone: '555-0106', categories: ['Seafood'] },
   { id: 'SUP007', name: 'GreenGrocers', contactPerson: 'Holly Green', email: 'holly@greengrocers.com', phone: '555-0107', categories: ['Vegetables'] },
+];
+
+export const mockSales: Sale[] = [
+    { id: 'SALE001', customerName: 'John Doe', productName: 'Organic Apples', date: '2024-07-31', quantity: 5, price: 2.50, total: 12.50 },
+    { id: 'SALE002', customerName: 'Jane Smith', productName: 'Whole Wheat Bread', date: '2024-07-31', quantity: 2, price: 4.00, total: 8.00 },
+    { id: 'SALE003', customerName: 'Mike Johnson', productName: 'Free-Range Eggs', date: '2024-07-30', quantity: 1, price: 5.00, total: 5.00 },
+    { id: 'SALE004', customerName: 'Emily Davis', productName: 'Cheddar Cheese', date: '2024-07-30', quantity: 1, price: 7.50, total: 7.50 },
+    { id: 'SALE005', customerName: 'Chris Brown', productName: 'Lean Ground Beef', date: '2024-07-29', quantity: 2, price: 10.00, total: 20.00 },
+    { id: 'SALE006', customerName: 'John Doe', productName: 'Salmon Fillet', date: '2024-07-29', quantity: 1, price: 15.00, total: 15.00 },
+    { id: 'SALE007', customerName: 'Jessica White', productName: 'Broccoli', date: '2024-07-28', quantity: 3, price: 1.50, total: 4.50 },
 ];

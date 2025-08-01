@@ -16,3 +16,13 @@ export interface Supplier {
   phone: string;
   categories: string[];
 }
+
+export interface Sale {
+  id: string;
+  customerName: string;
+  productName: string;
+  date: string;
+  quantity: number;
+  price: number;
+  total: number;
+}
