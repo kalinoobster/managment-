@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { mockOrders, mockProducts, mockSales } from '@/lib/mock-data';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
 import { generateReport, GenerateReportOutput } from '@/ai/flows/report-flow';
+import { OrderChart } from '@/components/dashboard/order-chart';
+import { SalesChart } from '@/components/dashboard/sales-chart';
 
 
 type Period = 'monthly' | 'yearly';
@@ -264,7 +266,26 @@ export default function AnalyticsPage() {
           </CardContent>
         </Card>
       </div>
-      
+        <div className="grid gap-4 md:grid-cols-2">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Order Details</CardTitle>
+                    <CardDescription>A summary of your recent orders.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <OrderChart />
+                </CardContent>
+            </Card>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Sales Details</CardTitle>
+                    <CardDescription>A summary of your recent sales.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <SalesChart />
+                </CardContent>
+            </Card>
+        </div>
        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
