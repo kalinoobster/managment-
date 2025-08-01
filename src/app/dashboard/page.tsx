@@ -18,8 +18,8 @@ import { mockOrders, mockProducts } from "@/lib/mock-data"
 
 
 export default function DashboardPage() {
-    const [todaysTotalOrders, setTodaysTotalOrders] = useState(0);
-    const [percentageIncrease, setPercentageIncrease] = useState(0);
+    const [todaysTotalOrders, setTodaysTotalOrders] = useState<number | null>(null);
+    const [percentageIncrease, setPercentageIncrease] = useState<number | null>(null);
 
     useEffect(() => {
         const today = new Date().toISOString().split('T')[0];
@@ -93,15 +93,25 @@ export default function DashboardPage() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{todaysTotalOrders}</div>
-            <p className="text-xs text-muted-foreground flex items-center">
-               {percentageIncrease >= 0 ? (
-                <ArrowUp className="h-4 w-4 text-green-500" />
-              ) : (
-                <ArrowDown className="h-4 w-4 text-red-500" />
-              )}
-              {percentageIncrease.toFixed(1)}% from yesterday
-            </p>
+            {todaysTotalOrders === null ? (
+                <div className="text-2xl font-bold">Loading...</div>
+            ) : (
+                <>
+                    <div className="text-2xl font-bold">{todaysTotalOrders}</div>
+                    <p className="text-xs text-muted-foreground flex items-center">
+                    {percentageIncrease !== null && (
+                        <>
+                            {percentageIncrease >= 0 ? (
+                                <ArrowUp className="h-4 w-4 text-green-500" />
+                            ) : (
+                                <ArrowDown className="h-4 w-4 text-red-500" />
+                            )}
+                            {percentageIncrease.toFixed(1)}% from yesterday
+                        </>
+                    )}
+                    </p>
+                </>
+            )}
           </CardContent>
         </Card>
         <Card>
