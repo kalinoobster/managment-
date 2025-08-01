@@ -146,8 +146,8 @@ export default function DashboardPage() {
                 <Link href="#" className="text-sm font-medium text-primary hover:underline">See All</Link>
             </CardHeader>
             <CardContent className="grid gap-4">
-               {lowQuantityStock.map((item) => (
-                    <div key={item.name} className="flex items-center justify-between">
+               {lowQuantityStock.map((item, index) => (
+                    <div key={`${item.name}-${index}`} className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                              <Image src={item.image} alt={item.name} width={40} height={40} data-ai-hint={item.hint}/>
                              <div>
