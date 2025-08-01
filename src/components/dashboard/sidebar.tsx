@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Package, Settings, ShoppingCart, Users, LineChart, LogOut } from "lucide-react"
+import { Home, Package, Settings, ShoppingCart, Users, LineChart, LogOut, Package2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
@@ -18,14 +18,14 @@ export function Sidebar() {
   ]
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-black sm:flex">
+    <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-background sm:flex">
         <TooltipProvider>
             <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
                 <Link
                     href="#"
                     className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
                 >
-                    <Package className="h-4 w-4 transition-all group-hover:scale-110" />
+                    <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
                     <span className="sr-only">SwiftStock</span>
                 </Link>
                 {navItems.map((item) => (
