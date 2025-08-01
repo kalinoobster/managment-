@@ -171,7 +171,8 @@ export default function DashboardPage() {
                 <Link href="/dashboard/inventory" className="text-sm font-medium text-primary hover:underline">See All</Link>
             </CardHeader>
             <CardContent className="grid gap-4">
-               {lowQuantityStock.map((item, index) => (
+               {lowQuantityStock.length > 0 ? (
+                lowQuantityStock.map((item, index) => (
                     <div key={`${item.name}-${index}`} className="flex items-center justify-between">
                          <div>
                             <p className="font-medium">{item.name}</p>
@@ -179,7 +180,10 @@ export default function DashboardPage() {
                          </div>
                         <span className="text-red-500 text-sm font-medium bg-red-100 px-2 py-1 rounded-md">Low</span>
                     </div>
-                ))}
+                ))
+               ) : (
+                <p className="text-sm text-muted-foreground">No items with low stock.</p>
+               )}
             </CardContent>
         </Card>
        </div>
