@@ -1,5 +1,4 @@
 
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import {
@@ -71,9 +70,6 @@ export default function DashboardPage() {
                   <div>
                       <CardTitle className="text-2xl font-bold">HELLO!!</CardTitle>
                       <CardDescription>It's good to see you again.</CardDescription>
-                  </div>
-                  <div className="relative h-24 w-24">
-                      <Image src="https://placehold.co/100x100.png" alt="Waving character" fill className="object-contain" data-ai-hint="waving person illustration"/>
                   </div>
               </div>
           </CardHeader>

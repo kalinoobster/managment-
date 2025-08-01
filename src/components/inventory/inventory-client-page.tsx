@@ -1,9 +1,9 @@
+
 "use client"
 
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
-import { mockProducts } from '@/lib/mock-data';
 import type { Product } from '@/lib/types';
 import { Input } from "@/components/ui/input"
 import {
@@ -29,6 +29,22 @@ export function InventoryClientPage({ initialProducts }: InventoryClientPageProp
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+
+  const categories = useMemo(() => {
+    const allCategories = initialProducts.map(p => p.category);
+    return ['all', ...Array.from(new Set(allCategories))];
+  }, [initialProducts]);
+
+  const filteredProducts = useMemo(() => {
+    return products.filter(product => {
+      const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = categoryFilter === 'all' || product.category === categoryFilter;
+      return matchesSearch && matchesCategory;
+    });
+  }, [products, searchTerm, categoryFilter]);
+
 
   const handleAddProduct = () => {
     setSelectedProduct(null);
@@ -79,16 +95,22 @@ export function InventoryClientPage({ initialProducts }: InventoryClientPageProp
               <p className="text-muted-foreground">Manage your product stock.</p>
             </div>
             <div className="flex items-center gap-2">
-                <Input placeholder="Search by name..." className="w-64" />
-                <Select>
+                <Input 
+                  placeholder="Search by name..." 
+                  className="w-64" 
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                     <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Filter by Category" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="fruits">Fruits</SelectItem>
-                        <SelectItem value="bakery">Bakery</SelectItem>
-                        <SelectItem value="dairy">Dairy & Eggs</SelectItem>
-                        <SelectItem value="meat">Meat</SelectItem>
+                        {categories.map(category => (
+                          <SelectItem key={category} value={category}>
+                            {category === 'all' ? 'All Categories' : category}
+                          </SelectItem>
+                        ))}
                     </SelectContent>
                 </Select>
                 <Button onClick={handleAddProduct}>
@@ -97,7 +119,7 @@ export function InventoryClientPage({ initialProducts }: InventoryClientPageProp
             </div>
         </div>
 
-      <InventoryTable columns={columns} data={products} />
+      <InventoryTable columns={columns} data={filteredProducts} />
 
       <ProductDialog
         isOpen={isDialogOpen}
