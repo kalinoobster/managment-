@@ -45,8 +45,6 @@ export default function DashboardPage() {
     .map(product => ({
         name: product.name,
         remaining: product.stock,
-        image: `https://placehold.co/40x40.png`,
-        hint: product.category.toLowerCase()
     }));
 
     const mostInStockProduct = mockProducts.reduce((max, p) => p.stock > max.stock ? p : max, mockProducts[0]);
@@ -167,13 +165,10 @@ export default function DashboardPage() {
             <CardContent className="grid gap-4">
                {lowQuantityStock.map((item, index) => (
                     <div key={`${item.name}-${index}`} className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
-                             <Image src={item.image} alt={item.name} width={40} height={40} data-ai-hint={item.hint}/>
-                             <div>
-                                <p className="font-medium">{item.name}</p>
-                                <p className="text-sm text-muted-foreground">Remaining Quantity: {item.remaining}</p>
-                             </div>
-                        </div>
+                         <div>
+                            <p className="font-medium">{item.name}</p>
+                            <p className="text-sm text-muted-foreground">Remaining Quantity: {item.remaining}</p>
+                         </div>
                         <span className="text-red-500 text-sm font-medium bg-red-100 px-2 py-1 rounded-md">Low</span>
                     </div>
                 ))}
