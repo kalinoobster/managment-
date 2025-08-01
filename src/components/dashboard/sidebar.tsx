@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Package, Settings, ShoppingCart, Users, LineChart, LogOut, Package2, CreditCard, Store, DollarSign, CircleDot } from "lucide-react"
+import { Home, Settings, ShoppingCart, Users, LogOut, CircleDot, Store, CreditCard, DollarSign } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
@@ -19,14 +19,14 @@ export function Sidebar() {
   ]
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col border-r bg-background sm:flex">
+    <aside className="fixed inset-y-0 left-0 z-10 hidden w-20 flex-col items-center justify-between bg-black py-5 sm:flex rounded-tl-lg rounded-bl-lg">
         <TooltipProvider>
-            <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
+            <nav className="flex flex-col items-center gap-4 px-2 w-full">
                 <Link
                     href="#"
-                    className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+                    className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base mb-4"
                 >
-                    <CircleDot className="h-5 w-5 transition-all group-hover:scale-110" />
+                    <CircleDot className="h-5 w-5 text-white transition-all group-hover:scale-110" />
                     <span className="sr-only">SwiftStock</span>
                 </Link>
                 {navItems.map((item) => (
@@ -35,11 +35,11 @@ export function Sidebar() {
                             <Link
                             href={item.href}
                             className={cn(
-                                "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
-                                pathname === item.href && "bg-accent text-accent-foreground"
+                                "flex h-12 w-full items-center justify-center rounded-lg text-white/70 transition-colors hover:bg-white/10 hover:text-white",
+                                pathname === item.href && "bg-white/20 text-white border-l-4 border-white"
                             )}
                             >
-                            <item.icon className="h-5 w-5" />
+                            <item.icon className="h-6 w-6" />
                             <span className="sr-only">{item.label}</span>
                             </Link>
                         </TooltipTrigger>
@@ -47,16 +47,16 @@ export function Sidebar() {
                     </Tooltip>
                 ))}
             </nav>
-            <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+            <nav className="flex flex-col items-center gap-4 px-2 w-full">
                  <Tooltip>
                     <TooltipTrigger asChild>
                         <Link
                         href="/dashboard/settings"
-                        className={cn("flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
-                           pathname === "/dashboard/settings" && "bg-accent text-accent-foreground"
+                        className={cn("flex h-12 w-full items-center justify-center rounded-lg text-white/70 transition-colors hover:bg-white/10 hover:text-white",
+                           pathname === "/dashboard/settings" && "bg-white/20 text-white"
                         )}
                         >
-                        <Settings className="h-5 w-5" />
+                        <Settings className="h-6 w-6" />
                         <span className="sr-only">Settings</span>
                         </Link>
                     </TooltipTrigger>
@@ -66,9 +66,9 @@ export function Sidebar() {
                     <TooltipTrigger asChild>
                         <Link
                         href="/login"
-                        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                        className="flex h-12 w-full items-center justify-center rounded-lg text-white/70 transition-colors hover:bg-white/10 hover:text-white"
                         >
-                        <LogOut className="h-5 w-5" />
+                        <LogOut className="h-6 w-6" />
                         <span className="sr-only">Logout</span>
                         </Link>
                     </TooltipTrigger>
