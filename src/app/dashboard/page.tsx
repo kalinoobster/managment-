@@ -15,12 +15,6 @@ import { OrderChart } from "@/components/dashboard/order-chart"
 import Link from "next/link"
 import { mockOrders, mockProducts } from "@/lib/mock-data"
 
-const lowQuantityStock = [
-    { name: 'Tata Salt', remaining: '10 Packet', image: 'https://placehold.co/40x40.png', hint: 'salt packet' },
-    { name: 'Lays', remaining: '15 Packet', image: 'https://placehold.co/40x40.png', hint: 'chips bag' },
-    { name: 'Lays', remaining: '15 Packet', image: 'https://placehold.co/40x40.png', hint: 'chips bag blue' },
-]
-
 
 export default function DashboardPage() {
   const salesByProduct = mockOrders
@@ -41,10 +35,21 @@ export default function DashboardPage() {
       return {
         name: productName,
         sold: sold,
-        remaining: product ? product.stock - sold : 0,
+        remaining: product ? product.stock : 0, // Remaining stock should be from product data
         price: product ? product.price : 0
       };
     });
+
+  const lowQuantityStock = mockProducts
+    .filter(p => p.stock < p.reorderThreshold)
+    .slice(0, 3) // Show top 3 for the dashboard
+    .map(product => ({
+        name: product.name,
+        remaining: product.stock,
+        image: `https://placehold.co/40x40.png`,
+        hint: product.category.toLowerCase()
+    }));
+
 
   return (
     <div className="flex flex-col gap-4">
