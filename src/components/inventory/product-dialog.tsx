@@ -32,6 +32,8 @@ export function ProductDialog({ isOpen, onClose, onSubmit, product }: ProductDia
       reorderThreshold: Number(formData.get("reorderThreshold")),
       supplier: formData.get("supplier") as string,
       expirationDate: formData.get("expirationDate") as string,
+      price: Number(formData.get("price")),
+      cost: Number(formData.get("cost")),
     }
     onSubmit(newProduct)
   }
@@ -62,6 +64,14 @@ export function ProductDialog({ isOpen, onClose, onSubmit, product }: ProductDia
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="reorderThreshold" className="text-right">Reorder Threshold</Label>
               <Input id="reorderThreshold" name="reorderThreshold" type="number" defaultValue={product?.reorderThreshold} className="col-span-3" />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="price" className="text-right">Sale Price</Label>
+                <Input id="price" name="price" type="number" step="0.01" defaultValue={product?.price} className="col-span-3" />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="cost" className="text-right">Purchase Cost</Label>
+                <Input id="cost" name="cost" type="number" step="0.01" defaultValue={product?.cost} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="supplier" className="text-right">Supplier</Label>

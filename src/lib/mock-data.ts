@@ -1,13 +1,13 @@
 import type { Product, Supplier, Sale, Order } from './types';
 
 export const mockProducts: Product[] = [
-  { id: 'PROD001', name: 'Organic Apples', category: 'Fruits', stock: 150, reorderThreshold: 50, supplier: 'FreshFarms Inc.', expirationDate: '2024-12-31' },
-  { id: 'PROD002', name: 'Whole Wheat Bread', category: 'Bakery', stock: 80, reorderThreshold: 30, supplier: 'Bakery Co.', expirationDate: '2024-11-15' },
-  { id: 'PROD003', name: 'Free-Range Eggs', category: 'Dairy & Eggs', stock: 200, reorderThreshold: 75, supplier: 'Happy Hens', expirationDate: '2024-11-20' },
-  { id: 'PROD004', name: 'Cheddar Cheese', category: 'Dairy & Eggs', stock: 45, reorderThreshold: 50, supplier: 'Cheese Masters', expirationDate: '2025-01-20' },
-  { id: 'PROD005', name: 'Lean Ground Beef', category: 'Meat', stock: 90, reorderThreshold: 40, supplier: 'Butcher Bros', expirationDate: '2024-11-10' },
-  { id: 'PROD006', name: 'Salmon Fillet', category: 'Seafood', stock: 35, reorderThreshold: 20, supplier: 'Ocean Fresh', expirationDate: '2024-11-08' },
-  { id: 'PROD007', name: 'Broccoli', category: 'Vegetables', stock: 120, reorderThreshold: 60, supplier: 'GreenGrocers', expirationDate: '2024-11-12' },
+  { id: 'PROD001', name: 'Organic Apples', category: 'Fruits', stock: 150, reorderThreshold: 50, supplier: 'FreshFarms Inc.', expirationDate: '2024-12-31', price: 2.50, cost: 1.50 },
+  { id: 'PROD002', name: 'Whole Wheat Bread', category: 'Bakery', stock: 80, reorderThreshold: 30, supplier: 'Bakery Co.', expirationDate: '2024-11-15', price: 4.00, cost: 2.00 },
+  { id: 'PROD003', name: 'Free-Range Eggs', category: 'Dairy & Eggs', stock: 200, reorderThreshold: 75, supplier: 'Happy Hens', expirationDate: '2024-11-20', price: 5.00, cost: 3.00 },
+  { id: 'PROD004', name: 'Cheddar Cheese', category: 'Dairy & Eggs', stock: 45, reorderThreshold: 50, supplier: 'Cheese Masters', expirationDate: '2025-01-20', price: 7.50, cost: 4.50 },
+  { id: 'PROD005', name: 'Lean Ground Beef', category: 'Meat', stock: 90, reorderThreshold: 40, supplier: 'Butcher Bros', expirationDate: '2024-11-10', price: 10.00, cost: 6.00 },
+  { id: 'PROD006', name: 'Salmon Fillet', category: 'Seafood', stock: 35, reorderThreshold: 20, supplier: 'Ocean Fresh', expirationDate: '2024-11-08', price: 15.00, cost: 10.00 },
+  { id: 'PROD007', name: 'Broccoli', category: 'Vegetables', stock: 120, reorderThreshold: 60, supplier: 'GreenGrocers', expirationDate: '2024-11-12', price: 1.50, cost: 0.75 },
 ];
 
 export const mockSuppliers: Supplier[] = [
@@ -31,9 +31,9 @@ export const mockSales: Sale[] = [
 ];
 
 export const mockOrders: Order[] = [
-  { id: "ORD001", customerName: "John Doe", date: "2024-07-31", total: 150.0, status: "Delivered" },
-  { id: "ORD002", customerName: "Jane Smith", date: "2024-07-30", total: 75.5, status: "Shipped" },
-  { id: "ORD003", customerName: "Mike Johnson", date: "2024-07-29", total: 220.0, status: "Processing" },
-  { id: "ORD004", customerName: "Emily Davis", date: "2024-07-28", total: 35.0, status: "Delivered" },
-  { id: "ORD005", customerName: "Chris Brown", date: "2024-07-27", total: 12.0, status: "Cancelled" },
+  { id: "ORD001", customerName: "John Doe", date: "2024-07-31", total: 150.0, status: "Delivered", productName: 'Organic Apples', quantity: 60, price: 2.50, cost: 1.50 },
+  { id: "ORD002", customerName: "Jane Smith", date: "2024-07-30", total: 75.5, status: "Shipped", productName: 'Whole Wheat Bread', quantity: 19, price: 4.00, cost: 2.00 },
+  { id: "ORD003", customerName: "Mike Johnson", date: "2024-07-29", total: 220.0, status: "Processing", productName: 'Free-Range Eggs', quantity: 44, price: 5.00, cost: 3.00 },
+  { id: "ORD004", customerName: "Emily Davis", date: "2024-07-28", total: 35.0, status: "Delivered", productName: 'Cheddar Cheese', quantity: 5, price: 7.50, cost: 4.50 },
+  { id: "ORD005", customerName: "Chris Brown", date: "2024-07-27", total: 12.0, status: "Cancelled", productName: 'Lean Ground Beef', quantity: 1, price: 10.00, cost: 6.00 },
 ];

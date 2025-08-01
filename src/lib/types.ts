@@ -6,6 +6,8 @@ export interface Product {
   reorderThreshold: number;
   supplier: string;
   expirationDate?: string;
+  price: number;
+  cost: number;
 }
 
 export interface Supplier {
@@ -33,4 +35,8 @@ export interface Order {
   date: string;
   total: number;
   status: 'Delivered' | 'Shipped' | 'Processing' | 'Cancelled';
+  productName: string;
+  quantity: number;
+  price: number;
+  cost: number;
 }

@@ -42,11 +42,19 @@ export const getColumns = (
     header: "Customer Name",
   },
   {
+    accessorKey: "productName",
+    header: "Product"
+  },
+  {
+    accessorKey: "quantity",
+    header: "Quantity"
+  },
+  {
     accessorKey: "date",
     header: "Date",
      cell: ({ row }) => {
         const date = row.original.date
-        return date ? new Date(date).toLocaleDate-String() : 'N/A'
+        return date ? new Date(date).toLocaleDateString() : 'N/A'
     }
   },
   {
