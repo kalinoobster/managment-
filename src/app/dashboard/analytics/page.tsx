@@ -7,7 +7,6 @@ import { DollarSign, Package, Users, ShoppingCart, TrendingUp, Circle, Truck, Ch
 import { Button } from "@/components/ui/button";
 import { mockOrders, mockProducts, mockSales } from '@/lib/mock-data';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
-import { generateReport, GenerateReportOutput } from '@/ai/flows/report-flow';
 import { OrderChart } from '@/components/dashboard/order-chart';
 import { SalesChart } from '@/components/dashboard/sales-chart';
 
@@ -18,9 +17,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF4560'
 
 export default function AnalyticsPage() {
     const [period, setPeriod] = useState<Period>('monthly');
-    const [report, setReport] = useState<GenerateReportOutput | null>(null);
-    const [isGenerating, setIsGenerating] = useState(false);
-
+    
     const filteredOrders = useMemo(() => {
         const now = new Date();
         if (period === 'monthly') {
@@ -95,28 +92,6 @@ export default function AnalyticsPage() {
         return counts;
     }, [filteredOrders]);
 
-    const handleGenerateReport = async () => {
-        setIsGenerating(true);
-        setReport(null);
-        try {
-            const result = await generateReport({
-                period,
-                orders: filteredOrders,
-                totalRevenue,
-                totalCost,
-                totalProfit,
-                profitMargin,
-                mostSoldItem,
-                mostProfitableItem,
-            });
-            setReport(result);
-        } catch (error) {
-            console.error("Failed to generate report:", error);
-            // You might want to show a toast notification here
-        }
-        setIsGenerating(false);
-    }
-
   return (
     <div className="space-y-6">
        <div className="flex items-center justify-between">
@@ -129,10 +104,6 @@ export default function AnalyticsPage() {
           <div className="flex gap-2">
             <Button variant={period === 'monthly' ? 'default' : 'outline'} onClick={() => setPeriod('monthly')}>Monthly</Button>
             <Button variant={period === 'yearly' ? 'default' : 'outline'} onClick={() => setPeriod('yearly')}>Yearly</Button>
-             <Button onClick={handleGenerateReport} disabled={isGenerating}>
-                <FileText className="mr-2 h-4 w-4" />
-                {isGenerating ? 'Generating...' : 'Generate Report'}
-            </Button>
           </div>
       </div>
       
@@ -201,28 +172,6 @@ export default function AnalyticsPage() {
         </Card>
       </div>
 
-       {report && (
-            <Card>
-                <CardHeader>
-                    <CardTitle>Generated AI Report for {period.charAt(0).toUpperCase() + period.slice(1)} Sales</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                    <div>
-                        <h4 className="font-semibold">Sales Summary</h4>
-                        <p className="text-sm text-muted-foreground">{report.salesSummary}</p>
-                    </div>
-                     <div>
-                        <h4 className="font-semibold">Performance Analysis</h4>
-                        <p className="text-sm text-muted-foreground">{report.performanceAnalysis}</p>
-                    </div>
-                     <div>
-                        <h4 className="font-semibold">Recommendations</h4>
-                        <p className="text-sm text-muted-foreground">{report.recommendations}</p>
-                    </div>
-                </CardContent>
-            </Card>
-        )}
-
        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         <Card className="col-span-4">
           <CardHeader>
@@ -250,7 +199,7 @@ export default function AnalyticsPage() {
              <CardDescription>
                 Top performing product categories.
             </CardDescription>
-          </CardHeader>
+          </Header>
           <CardContent>
             <ResponsiveContainer width="100%" height={350}>
                 <PieChart>
