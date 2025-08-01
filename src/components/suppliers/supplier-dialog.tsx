@@ -12,15 +12,20 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import type { Supplier } from "@/lib/types"
+import { MultiSelect } from "@/components/ui/multi-select"
+import { useState } from "react"
 
 interface SupplierDialogProps {
   isOpen: boolean
   onClose: () => void
   onSubmit: (supplier: Supplier) => void
   supplier: Supplier | null
+  allCategories: string[]
 }
 
-export function SupplierDialog({ isOpen, onClose, onSubmit, supplier }: SupplierDialogProps) {
+export function SupplierDialog({ isOpen, onClose, onSubmit, supplier, allCategories }: SupplierDialogProps) {
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(supplier?.categories || [])
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
@@ -30,7 +35,7 @@ export function SupplierDialog({ isOpen, onClose, onSubmit, supplier }: Supplier
       contactPerson: formData.get("contactPerson") as string,
       email: formData.get("email") as string,
       phone: formData.get("phone") as string,
-      categories: (formData.get("categories") as string).split(',').map(c => c.trim()),
+      categories: selectedCategories,
     }
     onSubmit(newSupplier)
   }
@@ -64,7 +69,13 @@ export function SupplierDialog({ isOpen, onClose, onSubmit, supplier }: Supplier
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="categories" className="text-right">Categories</Label>
-              <Input id="categories" name="categories" defaultValue={supplier?.categories.join(', ')} className="col-span-3" placeholder="Fruits, Vegetables" />
+              <MultiSelect
+                options={allCategories}
+                selected={selectedCategories}
+                onChange={setSelectedCategories}
+                className="col-span-3"
+                placeholder="Select or create categories..."
+              />
             </div>
           </div>
           <DialogFooter>

@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
-import { mockSuppliers } from '@/lib/mock-data';
+import { mockSuppliers, mockProducts } from '@/lib/mock-data';
 import type { Supplier } from '@/lib/types';
 import { Input } from "@/components/ui/input"
 import { getColumns } from './columns';
@@ -17,6 +17,12 @@ export function SuppliersClientPage() {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [selectedSupplier, setSelectedSupplier] = useState<Supplier | null>(null);
   const [supplierToDelete, setSupplierToDelete] = useState<Supplier | null>(null);
+
+  const allCategories = useMemo(() => {
+    const productCategories = mockProducts.map(p => p.category);
+    const supplierCategories = suppliers.flatMap(s => s.categories);
+    return Array.from(new Set([...productCategories, ...supplierCategories]));
+  }, [suppliers]);
 
   const handleAddSupplier = () => {
     setSelectedSupplier(null);
@@ -82,6 +88,7 @@ export function SuppliersClientPage() {
         onClose={handleDialogClose}
         onSubmit={handleFormSubmit}
         supplier={selectedSupplier}
+        allCategories={allCategories}
       />
 
       <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
