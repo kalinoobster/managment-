@@ -1,4 +1,7 @@
 
+"use client";
+
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import {
@@ -15,6 +18,27 @@ import { mockOrders, mockProducts } from "@/lib/mock-data"
 
 
 export default function DashboardPage() {
+    const [todaysTotalOrders, setTodaysTotalOrders] = useState(0);
+    const [percentageIncrease, setPercentageIncrease] = useState(0);
+
+    useEffect(() => {
+        const today = new Date().toISOString().split('T')[0];
+        const todaysOrders = mockOrders.filter(o => o.date.startsWith(today)).length;
+        
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yesterdaysDate = yesterday.toISOString().split('T')[0];
+        const yesterdaysOrders = mockOrders.filter(o => o.date.startsWith(yesterdaysDate)).length;
+
+        const percentage = yesterdaysOrders > 0
+            ? ((todaysOrders - yesterdaysOrders) / yesterdaysOrders) * 100
+            : todaysOrders > 0 ? 100 : 0;
+        
+        setTodaysTotalOrders(todaysOrders);
+        setPercentageIncrease(percentage);
+
+    }, []);
+
   const salesByProduct = mockOrders
     .filter(order => order.status !== 'Cancelled')
     .reduce((acc, order) => {
@@ -49,18 +73,6 @@ export default function DashboardPage() {
     const totalProducts = mockProducts.length;
     const quantityInHand = mockProducts.reduce((total, p) => total + p.stock, 0);
     const ordersToBeReceived = mockOrders.filter(o => o.status === 'Processing').reduce((sum, o) => sum + o.quantity, 0);
-    
-    const today = new Date().toISOString().split('T')[0];
-    const todaysTotalOrders = mockOrders.filter(o => o.date.startsWith(today)).length;
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yesterdaysDate = yesterday.toISOString().split('T')[0];
-    const yesterdaysTotalOrders = mockOrders.filter(o => o.date.startsWith(yesterdaysDate)).length;
-
-    const percentageIncrease = yesterdaysTotalOrders > 0 
-        ? ((todaysTotalOrders - yesterdaysTotalOrders) / yesterdaysTotalOrders) * 100 
-        : todaysTotalOrders > 0 ? 100 : 0;
-
 
   return (
     <div className="flex flex-col gap-4">
