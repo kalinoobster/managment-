@@ -7,11 +7,11 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-      <div className="grid min-h-screen w-full" style={{ gridTemplateColumns: '80px 1fr' }}>
+      <div className="flex min-h-screen w-full bg-background">
         <Sidebar />
-        <div className="flex flex-col">
+        <div className="flex flex-col sm:pl-20 w-full">
           <Header />
-          <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 bg-background">
+          <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
             {children}
           </main>
         </div>
