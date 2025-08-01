@@ -29,22 +29,20 @@ const lowQuantityStock = [
 
 export default function DashboardPage() {
   return (
-    <div className="flex-1 space-y-4 p-8 pt-6">
-      <div className="flex items-center justify-between space-y-2">
-         <Card className="w-full">
-            <CardHeader>
-                <div className="flex items-center justify-between">
-                    <div>
-                        <CardTitle className="text-2xl font-bold">HELLO!!</CardTitle>
-                        <CardDescription>It's good to see you again.</CardDescription>
-                    </div>
-                    <div className="relative h-24 w-24">
-                        <Image src="https://placehold.co/100x100.png" alt="Waving character" layout="fill" objectFit="contain" data-ai-hint="waving person illustration"/>
-                    </div>
-                </div>
-            </CardHeader>
-        </Card>
-      </div>
+    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+      <Card className="w-full mb-4">
+          <CardHeader>
+              <div className="flex items-center justify-between">
+                  <div>
+                      <CardTitle className="text-2xl font-bold">HELLO!!</CardTitle>
+                      <CardDescription>It's good to see you again.</CardDescription>
+                  </div>
+                  <div className="relative h-24 w-24">
+                      <Image src="https://placehold.co/100x100.png" alt="Waving character" layout="fill" objectFit="contain" data-ai-hint="waving person illustration"/>
+                  </div>
+              </div>
+          </CardHeader>
+      </Card>
 
        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
@@ -111,11 +109,11 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+       <div className="grid gap-4 md:grid-cols-2">
          <Card>
             <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>Top Selling Stock</CardTitle>
-                <Link href="#" className="text-sm font-medium text-primary hover:underline">See All</Link>
+                <Link href="/dashboard/inventory" className="text-sm font-medium text-primary hover:underline">See All</Link>
             </CardHeader>
             <CardContent>
                 <Table>
@@ -143,7 +141,7 @@ export default function DashboardPage() {
         <Card>
             <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>Low Quantity Stock</CardTitle>
-                <Link href="#" className="text-sm font-medium text-primary hover:underline">See All</Link>
+                <Link href="/dashboard/inventory" className="text-sm font-medium text-primary hover:underline">See All</Link>
             </CardHeader>
             <CardContent className="grid gap-4">
                {lowQuantityStock.map((item, index) => (

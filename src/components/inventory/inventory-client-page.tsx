@@ -21,17 +21,14 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 
 interface InventoryClientPageProps {
   initialProducts: Product[];
-  isDashboardView?: boolean;
 }
 
-export function InventoryClientPage({ isDashboardView = false }: InventoryClientPageProps) {
-  const [products, setProducts] = useState<Product[]>(mockProducts);
+export function InventoryClientPage({ initialProducts }: InventoryClientPageProps) {
+  const [products, setProducts] = useState<Product[]>(initialProducts);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
-
-  const displayedProducts = isDashboardView ? products.filter(p => p.stock < p.reorderThreshold) : products;
 
   const handleAddProduct = () => {
     setSelectedProduct(null);
@@ -67,7 +64,7 @@ export function InventoryClientPage({ isDashboardView = false }: InventoryClient
       setProducts(products.map(p => p.id === product.id ? product : p));
     } else {
       // Add
-      setProducts([...products, product]);
+      setProducts([...products, { ...product, id: `PROD${Date.now()}` }]);
     }
     handleDialogClose();
   };
@@ -76,7 +73,6 @@ export function InventoryClientPage({ isDashboardView = false }: InventoryClient
 
   return (
     <div>
-      {!isDashboardView && (
         <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-2xl font-bold">Inventory</h1>
@@ -100,9 +96,8 @@ export function InventoryClientPage({ isDashboardView = false }: InventoryClient
                 </Button>
             </div>
         </div>
-      )}
 
-      <InventoryTable columns={columns} data={displayedProducts} />
+      <InventoryTable columns={columns} data={products} />
 
       <ProductDialog
         isOpen={isDialogOpen}

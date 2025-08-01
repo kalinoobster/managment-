@@ -2,8 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Package2, Settings, ShoppingCart, Users, LineChart, LogOut } from "lucide-react"
-
+import { Home, Package, Settings, ShoppingCart, Users, LineChart, LogOut } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
@@ -12,7 +11,7 @@ export function Sidebar() {
 
   const navItems = [
     { href: "/dashboard", label: "Dashboard", icon: Home },
-    { href: "/dashboard/inventory", label: "Inventory", icon: Package2 },
+    { href: "/dashboard/inventory", label: "Inventory", icon: Package },
     { href: "/dashboard/suppliers", label: "Suppliers", icon: Users },
     { href: "/dashboard/orders", label: "Orders", icon: ShoppingCart },
     { href: "/dashboard/analytics", label: "Analytics", icon: LineChart },
@@ -26,7 +25,7 @@ export function Sidebar() {
                     href="#"
                     className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
                 >
-                    <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
+                    <Package className="h-4 w-4 transition-all group-hover:scale-110" />
                     <span className="sr-only">SwiftStock</span>
                 </Link>
                 {navItems.map((item) => (

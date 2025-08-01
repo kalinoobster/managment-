@@ -3,11 +3,11 @@
 import { Area, AreaChart, CartesianGrid, XAxis, Tooltip, Legend, ResponsiveContainer } from "recharts"
 
 const data = [
-  { name: "Jan", ordered: 3800, delivered: 2400 },
-  { name: "Feb", ordered: 3000, delivered: 2210 },
-  { name: "Mar", ordered: 3400, delivered: 2290 },
-  { name: "Apr", ordered: 2500, delivered: 2000 },
-  { name: "May", ordered: 3200, delivered: 2181 },
+  { name: "Jan", ordered: 380, delivered: 240 },
+  { name: "Feb", ordered: 300, delivered: 221 },
+  { name: "Mar", ordered: 340, delivered: 229 },
+  { name: "Apr", ordered: 250, delivered: 200 },
+  { name: "May", ordered: 320, delivered: 218 },
 ]
 
 export function OrderChart() {

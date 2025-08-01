@@ -5,7 +5,6 @@ import {
   Home,
   LineChart,
   Package,
-  Package2,
   Search,
   ShoppingCart,
   Users,
@@ -25,7 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
+import { Menu, Package2 } from "lucide-react"
 
 export function Header() {
   return (
@@ -59,7 +58,7 @@ export function Header() {
                     </Link>
                     <Link
                     href="/dashboard/inventory"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
+                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                     >
                     <Package className="h-5 w-5" />
                     Inventory
@@ -79,7 +78,7 @@ export function Header() {
                     Suppliers
                     </Link>
                     <Link
-                    href="#"
+                    href="/dashboard/analytics"
                     className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                     >
                     <LineChart className="h-5 w-5" />

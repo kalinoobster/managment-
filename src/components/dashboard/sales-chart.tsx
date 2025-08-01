@@ -3,16 +3,16 @@
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts"
 
 const data = [
-  { name: "Jan", purchase: 23000, sales: 54000 },
-  { name: "Feb", purchase: 59000, sales: 49000 },
-  { name: "Mar", purchase: 44000, sales: 52000 },
-  { name: "Apr", purchase: 37000, sales: 43000 },
-  { name: "May", purchase: 44000, sales: 44500 },
-  { name: "Jun", purchase: 28000, sales: 44000 },
-  { name: "Jul", purchase: 55000, sales: 48000 },
-  { name: "Aug", purchase: 44000, sales: 43000 },
-  { name: "Sep", purchase: 45000, sales: 42000 },
-  { name: "Oct", purchase: 28000, sales: 44000 },
+  { name: "Jan", purchase: 2300, sales: 5400 },
+  { name: "Feb", purchase: 5900, sales: 4900 },
+  { name: "Mar", purchase: 4400, sales: 5200 },
+  { name: "Apr", purchase: 3700, sales: 4300 },
+  { name: "May", purchase: 4400, sales: 4450 },
+  { name: "Jun", purchase: 2800, sales: 4400 },
+  { name: "Jul", purchase: 5500, sales: 4800 },
+  { name: "Aug", purchase: 4400, sales: 4300 },
+  { name: "Sep", purchase: 4500, sales: 4200 },
+  { name: "Oct", purchase: 2800, sales: 4400 },
 ]
 
 export function SalesChart() {
