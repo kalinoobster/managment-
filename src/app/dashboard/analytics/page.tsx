@@ -8,10 +8,13 @@ import { Button } from "@/components/ui/button";
 import { mockOrders, mockProducts, mockSales } from '@/lib/mock-data';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
 import { generateReport, GenerateReportOutput } from '@/ai/flows/report-flow';
+import { SalesChart } from "@/components/dashboard/sales-chart"
+import { OrderChart } from "@/components/dashboard/order-chart"
+
 
 type Period = 'monthly' | 'yearly';
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF4560', '#775DD0'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF4560', '#775DD0', '#8884d8', '#82ca9d', '#ffc658'];
 
 export default function AnalyticsPage() {
     const [period, setPeriod] = useState<Period>('monthly');
@@ -302,8 +305,26 @@ export default function AnalyticsPage() {
                 </CardContent>
             </Card>
        </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+        <Card className="col-span-4">
+          <CardHeader>
+            <CardTitle>Sales & Purchase</CardTitle>
+          </CardHeader>
+          <CardContent className="pl-2">
+            <SalesChart />
+          </CardContent>
+        </Card>
+        <Card className="col-span-3">
+          <CardHeader>
+            <CardTitle>Order Summary</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <OrderChart />
+          </CardContent>
+        </Card>
+      </div>
+
     </div>
   );
 }
-
-    

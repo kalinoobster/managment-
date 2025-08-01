@@ -1,3 +1,4 @@
+
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -10,8 +11,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Check, DollarSign, ArrowUp, Package, Inbox, ArrowDown } from "lucide-react"
-import { SalesChart } from "@/components/dashboard/sales-chart"
-import { OrderChart } from "@/components/dashboard/order-chart"
 import Link from "next/link"
 import { mockOrders, mockProducts } from "@/lib/mock-data"
 
@@ -124,28 +123,6 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">100</div>
-          </CardContent>
-        </Card>
-      </div>
-      
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
-          <CardHeader>
-            <CardTitle>Sales & Purchase</CardTitle>
-            <CardDescription>
-                <Button variant="outline" size="sm" className="ml-auto">Weekly</Button>
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="pl-2">
-            <SalesChart />
-          </CardContent>
-        </Card>
-        <Card className="col-span-3">
-          <CardHeader>
-            <CardTitle>Order Summary</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <OrderChart />
           </CardContent>
         </Card>
       </div>
