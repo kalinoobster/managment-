@@ -10,7 +10,9 @@ import {
   Users,
   User,
   LogOut,
-  ChevronDown
+  ChevronDown,
+  CreditCard,
+  Settings
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -40,7 +42,7 @@ export function Header() {
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="flex flex-col bg-black text-white">
+            <SheetContent side="left" className="flex flex-col bg-background">
                 <nav className="grid gap-2 text-lg font-medium">
                     <Link
                     href="#"
@@ -62,6 +64,13 @@ export function Header() {
                     >
                     <Package className="h-5 w-5" />
                     Inventory
+                    </Link>
+                     <Link
+                    href="/dashboard/sales"
+                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                    >
+                    <CreditCard className="h-5 w-5" />
+                    Sales
                     </Link>
                     <Link
                     href="/dashboard/orders"
@@ -115,7 +124,9 @@ export function Header() {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/dashboard/settings">Settings</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>

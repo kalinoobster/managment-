@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Package, Settings, ShoppingCart, Users, LineChart, LogOut, Package2 } from "lucide-react"
+import { Home, Package, Settings, ShoppingCart, Users, LineChart, LogOut, Package2, CreditCard } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
@@ -12,8 +12,9 @@ export function Sidebar() {
   const navItems = [
     { href: "/dashboard", label: "Dashboard", icon: Home },
     { href: "/dashboard/inventory", label: "Inventory", icon: Package },
-    { href: "/dashboard/suppliers", label: "Suppliers", icon: Users },
+    { href: "/dashboard/sales", label: "Sales", icon: CreditCard },
     { href: "/dashboard/orders", label: "Orders", icon: ShoppingCart },
+    { href: "/dashboard/suppliers", label: "Suppliers", icon: Users },
     { href: "/dashboard/analytics", label: "Analytics", icon: LineChart },
   ]
 
@@ -50,8 +51,10 @@ export function Sidebar() {
                  <Tooltip>
                     <TooltipTrigger asChild>
                         <Link
-                        href="#"
-                        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                        href="/dashboard/settings"
+                        className={cn("flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
+                           pathname === "/dashboard/settings" && "bg-accent text-accent-foreground"
+                        )}
                         >
                         <Settings className="h-5 w-5" />
                         <span className="sr-only">Settings</span>
