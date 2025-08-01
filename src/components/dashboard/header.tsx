@@ -1,3 +1,4 @@
+
 "use client"
 import Link from "next/link"
 import {
@@ -25,8 +26,13 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Package2 } from "lucide-react"
+import { mockProducts } from "@/lib/mock-data"
 
 export function Header() {
+  const lowStockProducts = mockProducts.filter(
+    (product) => product.stock < product.reorderThreshold
+  );
+
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6">
        <Sheet>
@@ -98,10 +104,34 @@ export function Header() {
       <div className="w-full flex-1">
         {/* Search form removed */}
       </div>
-       <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-            <Bell className="h-4 w-4" />
-            <span className="sr-only">Toggle notifications</span>
-          </Button>
+       <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon" className="relative ml-auto h-8 w-8">
+                <Bell className="h-4 w-4" />
+                <span className="sr-only">Toggle notifications</span>
+                {lowStockProducts.length > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-destructive text-xs text-white">
+                    {lowStockProducts.length}
+                  </span>
+                )}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {lowStockProducts.length > 0 ? (
+                lowStockProducts.map((product) => (
+                  <DropdownMenuItem key={product.id} asChild>
+                    <Link href="/dashboard/inventory" className="text-destructive">
+                      Low stock: {product.name} ({product.stock} left)
+                    </Link>
+                  </DropdownMenuItem>
+                ))
+              ) : (
+                <DropdownMenuItem>No new notifications</DropdownMenuItem>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
