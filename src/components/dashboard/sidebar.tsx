@@ -36,7 +36,7 @@ export function Sidebar() {
                             href={item.href}
                             className={cn(
                                 "flex h-12 w-full items-center justify-center rounded-lg text-white/70 transition-colors hover:bg-white/10 hover:text-white",
-                                pathname === item.href && "bg-white/20 text-white border-l-4 border-white"
+                                pathname === item.href && "bg-white/20 text-white border-2 border-white"
                             )}
                             >
                             <item.icon className="h-6 w-6" />
