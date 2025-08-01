@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Check, DollarSign, ArrowUp, Package, Inbox } from "lucide-react"
+import { Check, DollarSign, ArrowUp, Package, Inbox, ArrowDown } from "lucide-react"
 import { SalesChart } from "@/components/dashboard/sales-chart"
 import { OrderChart } from "@/components/dashboard/order-chart"
 import Link from "next/link"
@@ -60,7 +60,9 @@ export default function DashboardPage() {
     const yesterdaysDate = yesterday.toISOString().split('T')[0];
     const yesterdaysTotalOrders = mockOrders.filter(o => o.date.startsWith(yesterdaysDate)).length;
 
-    const percentageIncrease = yesterdaysTotalOrders > 0 ? ((todaysTotalOrders - yesterdaysTotalOrders) / yesterdaysTotalOrders) * 100 : todaysTotalOrders > 0 ? 100 : 0;
+    const percentageIncrease = yesterdaysTotalOrders > 0 
+        ? ((todaysTotalOrders - yesterdaysTotalOrders) / yesterdaysTotalOrders) * 100 
+        : todaysTotalOrders > 0 ? 100 : 0;
 
 
   return (
@@ -97,8 +99,12 @@ export default function DashboardPage() {
           <CardContent>
             <div className="text-2xl font-bold">{todaysTotalOrders}</div>
             <p className="text-xs text-muted-foreground flex items-center">
-              <ArrowUp className="h-4 w-4 text-green-500" />
-              {percentageIncrease.toFixed(1)}%
+               {percentageIncrease >= 0 ? (
+                <ArrowUp className="h-4 w-4 text-green-500" />
+              ) : (
+                <ArrowDown className="h-4 w-4 text-red-500" />
+              )}
+              {percentageIncrease.toFixed(1)}% from yesterday
             </p>
           </CardContent>
         </Card>
