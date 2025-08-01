@@ -199,7 +199,7 @@ export default function AnalyticsPage() {
              <CardDescription>
                 Top performing product categories.
             </CardDescription>
-          </Header>
+          </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={350}>
                 <PieChart>
