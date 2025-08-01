@@ -1,4 +1,4 @@
-import type { Product, Supplier, Sale } from './types';
+import type { Product, Supplier, Sale, Order } from './types';
 
 export const mockProducts: Product[] = [
   { id: 'PROD001', name: 'Organic Apples', category: 'Fruits', stock: 150, reorderThreshold: 50, supplier: 'FreshFarms Inc.', expirationDate: '2024-12-31' },
@@ -28,4 +28,12 @@ export const mockSales: Sale[] = [
     { id: 'SALE005', customerName: 'Chris Brown', productName: 'Lean Ground Beef', date: '2024-07-29', quantity: 2, price: 10.00, total: 20.00 },
     { id: 'SALE006', customerName: 'John Doe', productName: 'Salmon Fillet', date: '2024-07-29', quantity: 1, price: 15.00, total: 15.00 },
     { id: 'SALE007', customerName: 'Jessica White', productName: 'Broccoli', date: '2024-07-28', quantity: 3, price: 1.50, total: 4.50 },
+];
+
+export const mockOrders: Order[] = [
+  { id: "ORD001", customerName: "John Doe", date: "2024-07-31", total: 150.0, status: "Delivered" },
+  { id: "ORD002", customerName: "Jane Smith", date: "2024-07-30", total: 75.5, status: "Shipped" },
+  { id: "ORD003", customerName: "Mike Johnson", date: "2024-07-29", total: 220.0, status: "Processing" },
+  { id: "ORD004", customerName: "Emily Davis", date: "2024-07-28", total: 35.0, status: "Delivered" },
+  { id: "ORD005", customerName: "Chris Brown", date: "2024-07-27", total: 12.0, status: "Cancelled" },
 ];

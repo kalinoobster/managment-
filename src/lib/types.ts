@@ -26,3 +26,11 @@ export interface Sale {
   price: number;
   total: number;
 }
+
+export interface Order {
+  id: string;
+  customerName: string;
+  date: string;
+  total: number;
+  status: 'Delivered' | 'Shipped' | 'Processing' | 'Cancelled';
+}
